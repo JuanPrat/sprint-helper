@@ -4,11 +4,11 @@ import HuListComponent from "./huListComponent"
 class AddComponent extends Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {save: false}
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({ huName: this.huName.value, huPoints: this.huPoints.value });
+        this.setState({ huName: this.huName.value, huPoints: this.huPoints.value, save: true});
     }
     render() {
         return <div>
@@ -31,9 +31,9 @@ class AddComponent extends Component {
                         ref={inputElement => this.huPoints = inputElement}
                     />
                 </p>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <button onClickCapture={this.handleSubmit}>Submit</button>
             </form>
-            <HuListComponent huName={this.state.huName} huPoints={this.state.huPoints} />
+            <HuListComponent huName={this.state.huName} huPoints={this.state.huPoints} save={this.state.save}/>
         </div>
     }
 }
