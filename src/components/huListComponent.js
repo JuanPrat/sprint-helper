@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import '../css/style.css'
 
 class HuListComponent extends Component {
 
     constructor() {
         super()
-        this.state = { hus: localStorage.getItem('hus') ? JSON.parse(localStorage.getItem('hus')) : new Array() }
+        this.state = { hus: localStorage.getItem('hus') ? JSON.parse(localStorage.getItem('hus')) : [] }
     }
 
     saveInLocalStorage = () => {
-        console.log(this.state.hus.includes(this.props));
-        debugger
         if (!this.state.hus.includes(this.props.huName) && this.props.huName !== undefined) {
             let husArray = this.state.hus;
             husArray.push(this.props);
@@ -18,14 +17,23 @@ class HuListComponent extends Component {
         }
     }
 
+    handleRemove = (e) => {
+
+    }
+
     render() {
         this.saveInLocalStorage()
-        let huArrays = new Array();
-        debugger
+        let huArrays = [];
         this.state.hus.forEach(hu => huArrays.push(
-            <div>
-                <p>{hu.huName}</p>
-                <p>{hu.huPoints}</p>
+            <div className="card" key={hu.name}>
+                <section className="controls">
+                        <p>{hu.huName}</p>
+                        <p>{hu.huPoints}</p>
+                </section>
+                <section className="time">
+                    <button>Begin</button>
+                    <button>remove</button>
+                </section>
             </div>))
         return huArrays;
     }
